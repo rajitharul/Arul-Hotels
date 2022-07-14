@@ -37,7 +37,7 @@ public class FlightController {
 	@GetMapping("/list")
 	public String listFlights(Model theModel) {
 		
-		// add to the spring model
+		// add to the spring model of FLights
 		theModel.addAttribute("flights", flightRepository.findAll());
 		
 		return "list-flights";
