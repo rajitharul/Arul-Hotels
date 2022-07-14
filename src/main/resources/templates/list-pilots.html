@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<title>Pilot List</title>
+</head>
+
+<body>
+<div class="container">
+
+
+	<h1>Pilot Management </h1>
+	<hr>
+
+	<h3>Add new Pilots</h3>
+
+	<a th:href="@{/pilots/showFormForAdd}"
+	   class="btn btn-primary btn-lg btn-block">
+		Add Pilot
+	</a>
+
+	<hr>
+	<br>
+	<h3>List or Pilots</h3>
+
+
+	<table class="table table-bordered table-striped">
+		<thead class="thead-dark">
+			<tr>
+				<th>Id</th>
+				<th>FirstName</th>
+				<th>LastName</th>
+				<th>email</th>
+				<th>nationality</th>
+				<th>pilotLicenceId</th>
+				<th>yearsOfExperience</th>
+
+
+				<th>Action</th>
+
+
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr th:each="tempPilot : ${pilots}">
+			
+				<td th:text="${tempPilot.id}" />
+				<td th:text="${tempPilot.firstName}" />
+				<td th:text="${tempPilot.lastName}" />
+				<td th:text="${tempPilot.email}" />
+				<td th:text="${tempPilot.nationality}" />
+
+				<td th:text="${tempPilot.pilotLicenceId}" />
+				<td th:text="${tempPilot.yearsOfExperience}" />
+
+
+				<!-- Add update an pilot /link -->
+				<td>
+					<a th:href="@{/pilots/showFormForUpdate(pilotId=${tempPilot.id})}"
+					   class="btn btn-danger btn-sm">
+						Update
+					</a>
+
+					<a th:href="@{/pilots/delete(pilotId=${tempPilot.id})}"
+					   class="btn btn-info btn-sm"
+					   onclick="if (!(confirm('Are you sure want to delete This pilot? '))) return false">
+
+						Delete
+					</a>
+
+				</td>
+
+
+			</tr>
+		</tbody>		
+	</table>
+	<a th:href="@{/}">Back To the Main DashBoard</a>
+
+</div>
+</body>
+</html>
+
+
+

@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<!------ Include the above in your HEAD tag ---------->
+	<title>Jobs List</title>
+</head>
+
+<body>
+
+<header>
+	<!-- Navbar -->
+	<!-- Navbar -->
+
+	<!-- Background image -->
+	<div
+			class="p-5 text-center bg-image"
+			style="
+      background-image: url('https://www.cinnamonlife.com/images/landing-desk-header.jpg');
+      height: 350px;
+    "
+	>
+		<div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
+			<div class="d-flex justify-content-center align-items-center h-150">
+				<div class="text-white">
+					<br>
+					<h1 class="mb-3">Cinnamon Life  - Careers</h1>
+					<h4 class="mb-3">Vacancies Avaiable At Cinnamon Life</h4>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Background image -->
+</header>
+
+<div class="container">
+
+	<br>
+	<div id="products" class="row view-group">
+
+
+		<div class="item col-xs-4 col-lg-4" th:each="tempJob : ${jobs}">
+			<div class="thumbnail card">
+				<div class="img-event">
+					<img class="group list-group-image img-fluid" src="http://placehold.it/400x250/000/fff" alt="" />
+				</div>
+				<div class="caption card-body">
+					<h4 class="group card-title inner list-group-item-heading" th:text="${tempJob.name}">
+						</h4>
+					<p class="group inner list-group-item-text"  th:text="${tempJob.description}">
+						</p>
+					<div class="row">
+						<div class="col-xs-12 col-md-6">
+							<p class="lead" th:text="${tempJob.category?.name}">
+								</p>
+						</div>
+						<div class="col-xs-12 col-md-6">
+							<a  th:href="@{/applications/showFormForAdd(jobId=${tempJob.id})}" class="btn btn-success" href="http://www.jquery2dotnet.com" >Apply For Job</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+</body>
+</html>
+
+
+

@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<title>Airport List</title>
+</head>
+
+<body>
+<div class="container">
+
+
+	<h1>Airport Management</h1>
+	<hr>
+
+	<h3>Add new  Airports</h3>
+
+
+	<a th:href="@{/airports/showFormForAdd}"
+	   class="btn btn-primary btn-lg btn-block">
+		Add Airport
+	</a>
+
+	<hr>
+	<br>
+
+	<h3>List or Airports</h3>
+
+
+	<table class="table table-bordered table-striped">
+		<thead class="thead-dark">
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Country</th>
+				<th>City</th>
+				<th>Registration Cost</th>
+				<th>Action</th>
+
+
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr th:each="tempAirport : ${airports}">
+			
+				<td th:text="${tempAirport.id}" />
+				<td th:text="${tempAirport.name}" />
+				<td th:text="${tempAirport.country}" />
+				<td th:text="${tempAirport.city}" />
+				<td th:text="${tempAirport.registrationCost}" />
+
+				<!-- Add update an airport /link -->
+				<td>
+					<a th:href="@{/airports/showFormForUpdate(airportId=${tempAirport.id})}"
+					   class="btn btn-danger btn-sm">
+						Update
+					</a>
+
+					<a th:href="@{/airports/delete(airportId=${tempAirport.id})}"
+					   class="btn btn-info btn-sm"
+					   onclick="if (!(confirm('Are you sure want to delete This airport? '))) return false">
+						>
+						Delete
+					</a>
+
+				</td>
+
+
+			</tr>
+		</tbody>		
+	</table>
+
+	<hr>
+	<a th:href="@{/}">Back To the Main DashBoard</a>
+
+
+</div>
+</body>
+</html>
+
+
+

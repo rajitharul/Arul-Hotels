@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title> Application - Form - Food and Beverages</title>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h3>Application Form </h3>
+    <hr>
+
+    <p class="h4 mb-4">Please fill in the Form and Submit</p>
+
+    <form action="#" th:action="@{/applications/save(jobId=${jobId})}"
+          th:object="${application}" method="POST" enctype="multipart/form-data">
+
+
+
+
+
+        <!-- Add hidden form field to handle update -->
+        <input type="hidden" th:field="*{id}" />
+
+        <h5>First Name</h5>
+        <input type="text" th:field="*{firstName}"
+               class="form-control mb-4 col-4" placeholder="First Name">
+
+        <h5>Last Name</h5>
+
+        <input type="text" th:field="*{lastName}"
+               class="form-control mb-4 col-4" placeholder="Last Name">
+
+        <h5>Email</h5>
+
+        <input type="text" th:field="*{email}"
+               class="form-control mb-4 col-4" placeholder="Email">
+
+        <h5>Mobile</h5>
+
+        <input type="number" th:field="*{mobile}"
+               class="form-control mb-4 col-4" placeholder="Mobile Number">
+
+        <h5>Add Your CV if You Wish to Add </h5>
+        <input type="file" name="files" multiple required/>
+
+        <br>
+        <br>
+        <button type="submit" class="btn btn-info col-2">Save</button>
+
+
+    </form>
+
+    <hr>
+    <a th:href="@{/}">To Cinnamon Life Careers</a>
+
+</div>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+

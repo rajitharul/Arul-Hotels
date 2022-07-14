@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<title>Cabin Crew Members List</title>
+</head>
+
+<body>
+<div class="container">
+
+
+	<h1>Cabin Crew Management </h1>
+	<hr>
+
+	<h3>Add new Cabin Crew Members</h3>
+
+
+	<a th:href="@{/cabincrewmembers/showFormForAdd}"
+	   class="btn btn-primary btn-lg btn-block">
+		Add Members
+	</a>
+
+	<hr>
+	<br>
+
+	<h3>List or Members</h3>
+
+	<table class="table table-bordered table-striped">
+		<thead class="thead-dark">
+			<tr>
+				<th>Id</th>
+				<th>firstName</th>
+				<th>lastName</th>
+				<th>email</th>
+				<th>Nationality</th>
+				<th>Years Of Experience</th>
+				<th>Action</th>
+
+
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr th:each="tempmember : ${cabinCrewMembers}">
+			
+				<td th:text="${tempmember.id}" />
+				<td th:text="${tempmember.firstName}" />
+				<td th:text="${tempmember.lastName}" />
+				<td th:text="${tempmember.email}" />
+				<td th:text="${tempmember.nationality}" />
+				<td th:text="${tempmember.yearsOfExperience}" />
+
+				<!-- Add update an member /link -->
+				<td>
+					<a th:href="@{/cabincrewmembers/showFormForUpdate(cabinCrewMemberId=${tempmember.id})}"
+					   class="btn btn-info btn-sm">
+						Update
+					</a>
+
+					<a th:href="@{/cabincrewmembers/delete(cabinCrewMemberId=${tempmember.id})}"
+					   class="btn btn-danger btn-sm"
+					   onclick="if (!(confirm('Are you sure want to delete This cabincrewmember? '))) return false">
+						>
+						Delete
+					</a>
+
+				</td>
+
+
+			</tr>
+		</tbody>		
+	</table>
+	<a th:href="@{/}">Back To the Main DashBoard</a>
+
+</div>
+</body>
+</html>
+
+
+

@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<title>ADMIN - Applications List</title>
+</head>
+
+<body>
+<div class="container">
+
+
+	<h1>ADMIN APPLICATION MANAGMENT </h1>
+	<hr>
+
+	<h3>List of Applications</h3>
+
+
+	<br>
+
+
+	<form action="#" th:action="@{/admin/listApplications}"
+		 method="GET">
+
+
+		<div class="text-nowrap" style="width: 8rem;">
+			Select Filtering Criteria
+		</div>
+		<select class="form-select" aria-label="Default select example" name="keywordCategory" >
+			<option th:each="tempCategory : ${categories}" th:value="${{tempCategory.name}}" th:text="${tempCategory.name}">Select</option>
+		</select>
+
+		<select class="form-select" aria-label="Default select example" name="keywordJob" >
+			<option th:each="tempjob : ${jobs}" th:value="${{tempjob.name}}" th:text="${tempjob.name}">Select</option>
+		</select>
+
+		<select class="form-select" aria-label="Default select example" name="keywordStatus" >
+			<option th:each="tempStatus : ${statuses}" th:value="${{tempStatus.id}}" th:text="${tempStatus.name}">Select</option>
+		</select>
+		Select the Filter Criterai - Filter By
+		<select class="form-select" aria-label="Default select example" name="filterBy" >
+			<option  th:value="Job" >Job</option>
+			<option  th:value="Status" >Status</option>
+		</select>
+
+		<button type="submit" class="btn btn-info col-2">Filter</button>
+
+
+	</form>
+
+
+
+
+
+	<table class="table table-bordered table-striped">
+		<thead class="thead-dark">
+			<tr>
+				<th>Id</th>
+				<th>FirstName</th>
+				<th>LastName</th>
+				<th>email</th>
+				<th>mobile</th>
+				<th>status</th>
+				<th>Job Applied</th>
+				<th>Action</th>
+
+
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr th:each="tempApplication : ${applications}">
+
+				<td th:text="${tempApplication.id}" />
+				<td th:text="${tempApplication.firstName}" />
+				<td th:text="${tempApplication.lastName}" />
+				<td th:text="${tempApplication.email}" />
+				<td th:text="${tempApplication.mobile}" />
+				<td th:text="${tempApplication.status.name}" />
+				<td th:text="${tempApplication.getJobs()[0].name}" />
+
+
+				<!-- Add update an pilot /link -->
+				<td>
+
+					<a th:href="@{/admin/showApplication(applicationId=${tempApplication.id})}"
+					   class="btn btn-info btn-sm">
+						View Application
+					</a>
+
+				</td>
+
+
+			</tr>
+		</tbody>		
+	</table>
+	<a th:href="@{/}">Back To the Main DashBoard</a>
+
+</div>
+</body>
+</html>
+
+
+

@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Save Plane</title>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h3>Plane Directory</h3>
+    <hr>
+
+    <p class="h4 mb-4">Save Plane</p>
+
+    <form action="#" th:action="@{/planes/save}"
+          th:object="${plane}" method="POST">
+
+
+        <!-- Add hidden form field to handle update -->
+        <input type="hidden" th:field="*{id}" />
+
+        <input type="text" th:field="*{name}"
+               class="form-control mb-4 col-4" placeholder="name">
+
+        <input type="text" th:field="*{countryOfManufacture}"
+               class="form-control mb-4 col-4" placeholder="country Of Manufacture">
+
+        <input type="text" th:field="*{model}"
+               class="form-control mb-4 col-4" placeholder="model">
+
+        <input type="number" th:field="*{engineCapacity}"
+               class="form-control mb-4 col-4" placeholder="Engine Capacity">
+
+        <input type="date" th:field="*{makeYear}"
+               class="form-control mb-4 col-4" placeholder="Make Year , Month and Date ">
+        <button type="submit" class="btn btn-info col-2">Save</button>
+
+    </form>
+
+    <hr>
+    <a th:href="@{/planes/list}">To view Planes List</a>
+
+</div>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+

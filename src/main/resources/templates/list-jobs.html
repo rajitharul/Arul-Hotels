@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<title>Jobs List</title>
+</head>
+
+<body>
+<div class="container">
+
+
+	<h1>Job Management</h1>
+	<hr>
+
+
+	<h3>Add new Job</h3>
+
+	<a th:href="@{/jobs/showFormForAdd}"
+	   class="btn btn-primary btn-lg btn-block">
+		Add Job
+	</a>
+
+	<hr>
+	<br>
+
+	<h3>List of Jobs</h3>
+
+
+	<table class="table table-bordered table-striped">
+		<thead class="thead-dark">
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Category</th>
+				<th>Action</th>
+
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr th:each="tempJob : ${jobs}">
+			
+				<td th:text="${tempJob.id}" />
+				<td th:text="${tempJob.name}" />
+				<td th:text="${tempJob.description}" />
+				<td th:text="${tempJob.category?.name}" />
+
+
+				<td>
+					<a th:href="@{/jobs/showFormForUpdate(jobId=${tempJob.id})}"
+					   class="btn btn-info btn-sm">
+						Update
+					</a>
+
+					<a th:href="@{/jobs/delete(jobId=${tempJob.id})}"
+					   class="btn btn-danger btn-sm"
+					   onclick="if (!(confirm('Are you sure want to delete This Job and Its Corresponding Details? '))) return false">
+						Delete
+					</a>
+
+				</td>
+
+
+
+		</tr>
+		</tbody>		
+	</table>
+	<a th:href="@{/}">Back To the Cinnamon Life Careers</a>
+
+</div>
+</body>
+</html>
+
+
+

@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title> Proceeding The Application </title>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h3>Application Form </h3>
+    <hr>
+
+    <p class="h4 mb-4">Details of the Applicant</p>
+
+    <form action="#" th:action="@{/applications/update(jobId=${jobId},prestatusId=${jobId})}"
+          th:object="${theApplication}" method="POST" enctype="multipart/form-data">
+
+
+        <!-- Add hidden form field to handle update -->
+        <input type="hidden" th:field="*{id}" />
+
+
+        <input type="text" th:field="*{firstName}"
+               class="form-control mb-4 col-4" placeholder="firstName" readonly>
+
+        <input type="text" th:field="*{lastName}"
+               class="form-control mb-4 col-4" placeholder="lastName" readonly>
+
+        <input type="text" th:field="*{email}"
+               class="form-control mb-4 col-4" placeholder="email" readonly>
+
+        <input type="number" th:field="*{mobile}"
+               class="form-control mb-4 col-4" placeholder="mobile number" readonly>
+
+        <h3>Current Status of The Application Is </h3>
+        <p><mark th:text="*{status.name}"></mark></p>
+
+        <h3>Add the CV </h3>
+        <input type="file" name="files" multiple />
+
+
+        <div>
+            <h3>List of Documents</h3>
+            <table>
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Download Link</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="doc:${docs}">
+                    <td th:text="${doc.id}"></td>
+                    <td th:text="${doc.docName}"></td>
+                    <td><a th:href="@{'/docs/downloadFile/'+${doc.id}}">Download</a></td>
+
+                    <td>
+                        <a th:href="@{/docs/delete(docId=${doc.id})}"
+                           class="btn btn-info btn-sm"
+                           onclick="if (!(confirm('Are you sure want to delete This doc? '))) return false">
+                            Delete
+                        </a>
+                    </td>
+
+
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <div class="text-nowrap" style="width: 8rem;">
+           Select the Stage that the Applicant will be moving Foward
+        </div>
+
+        <select class="form-select" aria-label="Default select example" th:field="*{status}" name="statusSelected">
+            <option th:each="tempStatus : ${statuses}" th:value="${{tempStatus.id}}" th:text="${tempStatus.name}">Select</option>
+        </select>
+
+
+        <button type="submit" class="btn btn-info col-2">Update</button>
+
+
+
+
+    </form>
+
+
+
+    <hr>
+    <a th:href="@{/}">To Main Arul Hotels Page</a>
+
+</div>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+

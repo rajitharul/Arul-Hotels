@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Track Your Application</title>
+</head>
+
+<body>
+<div class="container">
+
+
+    <h3>Track Your Application</h3>
+
+    <form action="#" th:action="@{/applications/showFormForUpdate}"
+          th:object="${application}" method="POST">
+
+        <input type="number" th:field="*{mobile}"
+               class="form-control mb-4 col-4" placeholder="Mobile Number">
+        <button type="submit" class="btn btn-info col-2">Track Application</button>
+
+    </form>
+
+
+
+
+
+    </form>
+
+
+    <a th:href="@{/}">Back To Cinnamon Life Careers</a>
+
+</div>
+</body>
+</html>
+
+
+

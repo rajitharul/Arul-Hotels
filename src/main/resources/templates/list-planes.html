@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<title>Planes List</title>
+</head>
+
+<body>
+<div class="container">
+
+
+	<h1>Plane Management</h1>
+	<hr>
+
+
+	<h3>Add new Planes</h3>
+
+
+	<a th:href="@{/planes/showFormForAdd}"
+	   class="btn btn-primary btn-lg btn-block">
+		Add Planes
+	</a>
+
+	<br>
+	<hr>
+
+	<h3>List of Planes Directory</h3>
+
+	<table class="table table-bordered table-striped">
+		<thead class="thead-dark">
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Country Of Manufacture</th>
+				<th>model</th>
+				<th>engineCapacity</th>
+				<th>Make Year</th>
+				<th>Action</th>
+
+
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr th:each="tempPlane : ${planes}">
+			
+				<td th:text="${tempPlane.id}" />
+				<td th:text="${tempPlane.name}" />
+				<td th:text="${tempPlane.countryOfManufacture}" />
+				<td th:text="${tempPlane.model}" />
+				<td th:text="${tempPlane.engineCapacity}" />
+				<td th:text="${tempPlane.makeYear}" />
+
+
+				<!-- Add update an Plane /link -->
+				<td>
+					<a th:href="@{/planes/showFormForUpdate(planeId=${tempPlane.id})}"
+					   class="btn btn-info btn-sm">
+						Update
+					</a>
+
+					<a th:href="@{/planes/delete(planeId=${tempPlane.id})}"
+					   class="btn btn-danger btn-sm"
+					   onclick="if (!(confirm('Are you sure want to delete This Plane? '))) return false">
+
+						Delete
+					</a>
+
+				</td>
+
+
+			</tr>
+		</tbody>		
+	</table>
+	<a th:href="@{/}">Back To the Main DashBoard</a>
+
+</div>
+</body>
+</html>
+
+
+

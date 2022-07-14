@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Add Flight</title>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h3>Flight Directory</h3>
+    <hr>
+
+    <p class="h4 mb-4">Save Flight</p>
+
+    <form action="#" th:action="@{/flights/save}"
+          th:object="${flight}" method="POST">
+
+
+        <!-- Add hidden form field to handle update -->
+        <input type="hidden" th:field="*{id}" />
+
+        <input type="text" th:field="*{name}"
+               class="form-control mb-4 col-4" placeholder="name">
+
+        <input type="date" th:field="*{startDate}"
+               class="form-control mb-4 col-4" placeholder="Start Date and Time ">
+
+        <div class="text-nowrap" style="width: 8rem;">
+            Select A Plane for this Flight from the Available Planes Below
+        </div>
+        <select class="form-select" aria-label="Default select example" th:field="*{plane}">
+            <option th:each="tempPlane : ${planes}" th:value="${{tempPlane}}" th:text="${tempPlane.name}">Select</option>
+        </select>
+
+        <br>
+        <br>
+        <div class="text-nowrap" style="width: 8rem;">
+            Select A Pilot  for this Flight from the Available Pilots Below
+        </div>
+        <select class="form-select" aria-label="Default select example" th:field="*{pilot}">
+            <option th:each="tempPilot : ${pilots}" th:value="${{tempPilot}}" th:text="${tempPilot.firstName}">Select</option>
+        </select>
+        <br>
+
+        <br>
+        <div class="text-nowrap" style="width: 8rem;">
+            Select A Airport for this Flight from the Available Airports Below
+        </div>
+        <select class="form-select" aria-label="Default select example" th:field="*{airport}">
+            <option th:each="tempAirport : ${airports}" th:value="${{tempAirport}}" th:text="${tempAirport.name}">Select</option>
+        </select>
+
+        <br>
+        <br>
+
+        <button type="submit" class="btn btn-info col-2">Save</button>
+
+
+    </form>
+
+
+
+    <hr>
+    <a th:href="@{/flights/list}">To view FLights List</a>
+
+</div>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
