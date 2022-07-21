@@ -26,11 +26,11 @@ public class CsvExportService {
         List<Application> applications = applicationRepository.findAll();
         try (CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT)) {
 
-            csvPrinter.printRecord("id" , "firstName" , "lastName"  ,"status" , "job" , "category");
+            csvPrinter.printRecord("id" , "firstName" , "lastName"  ,"status" , "job" , "category" , "mobile" , "email");
 
             for (Application application : applications) {
                 csvPrinter.printRecord(application.getId(), application.getFirstName(), application.getLastName(),application.getStatus().getName()
-                ,application.getJobs().iterator().next().getName() ,application.getJobs().iterator().next().getCategory().getName());
+                ,application.getJobs().iterator().next().getName() ,application.getJobs().iterator().next().getCategory().getName() , application.getMobile() , application.getEmail());
             }
 
 

@@ -16,6 +16,12 @@
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link th:href="@{/css/styles.css}" rel="stylesheet" />
+
+        <script type="text/javascript" th:src="@{/js/cssandjs/actions.js}"></script>
+        <script th:inline="javascript">
+            var nameJs = "Cinnamon Life";
+        </script>
+
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -43,7 +49,8 @@
 
                 <a class="btn btn-primary btn-xl" href="/categories/showFormForAdd">Add Category</a>
                 <a class="btn btn-primary btn-xl" href="/jobs/showFormForAdd">Add Job</a>
-                <a class="btn btn-primary btn-xl" href="/admin/listApplications">Show Applications</a>
+                <a class="btn btn-primary btn-xl" href="/admin/listApplications" >Show Applications</a>
+
 
 
             </div>
@@ -55,6 +62,8 @@
                 <h2 class="mb-4"Select the Management Rold </h2>
                 <a class="btn btn-xl btn-light me-4" href="/docs/downloadFile/19">QR Code </a>
                 <a class="btn btn-xl btn-dark" href="/admin/mainPanel/copyLink"  onclick="!(alert('Job Link Is copied '))">Copy the Job Link</a>
+                <a class="btn btn-xl btn-light me-4" href="/applications/applicationCSV" th:onclick="showAlertCSVDownloaded()">Download CSV Applications</a>
+
             </div>
         </section>
 
