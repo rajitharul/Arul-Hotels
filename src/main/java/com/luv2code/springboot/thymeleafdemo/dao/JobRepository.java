@@ -13,5 +13,5 @@ public interface JobRepository extends JpaRepository<Job, Integer> {
 
 
     Set<Job> findByName(String name);
-
+    Set<Job> findByCategory_Name(String categoryName);
 }

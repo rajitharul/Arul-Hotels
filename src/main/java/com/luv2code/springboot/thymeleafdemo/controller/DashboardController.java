@@ -67,13 +67,19 @@ public class DashboardController {
 	@GetMapping("/admin/listApplications")
 	public String listApplciations(Model theModel , String keywordCategory , String keywordJob , String keywordStatus , String filterBy) {
 
+		String StatusSelected =keywordStatus ;
+
 
 		List<Application> filteredApplications;
 
 		if(keywordCategory == null && keywordJob == null){
 			System.out.println("------------------------No Filter in Place-----------------------");
+			keywordCategory = "";
+			keywordJob = "";
+			keywordStatus = "1";
 
-			 filteredApplications  = applicationRepository.findAll();
+
+			filteredApplications  = applicationRepository.findAll();
 		}else {
 
 			if (filterBy.equals("Job")){
@@ -83,9 +89,18 @@ public class DashboardController {
 			}else if (filterBy.equals("Status")){
 				System.out.println("Filtering By Status ------------------------------");
 
+
+
+
 				filteredApplications = applicationRepository.findByStatusId(Integer.parseInt(keywordStatus));
 
-			}else {
+			}else if(filterBy.equals("Category")){
+				System.out.println("Filtering By Category ------------------------------");
+				Set<Job> filteredJobs = jobRepository.findByCategory_Name(keywordCategory);
+				filteredApplications = applicationRepository.findByJobsIn(filteredJobs);
+			}
+
+			else {
 				System.out.println("Filtering By None ------------------------------");
 
 				filteredApplications  = applicationRepository.findAll();
@@ -95,12 +110,20 @@ public class DashboardController {
 		}
 
 
-
 		// add to the spring model
 		theModel.addAttribute("applications",filteredApplications);
 		theModel.addAttribute("categories", categoryRepository.findAll());
 		theModel.addAttribute("jobs", jobRepository.findAll());
 		theModel.addAttribute("statuses", statusRepository.findAll());
+
+		theModel.addAttribute("selectedJob", keywordJob);
+		theModel.addAttribute("selectedStatus",statusRepository.findById(Integer.parseInt(keywordStatus)).get().getName());
+		theModel.addAttribute("selectedStatusId",keywordStatus);
+
+		theModel.addAttribute("selectedCategory", keywordCategory);
+		theModel.addAttribute("selectedFilter", filterBy);
+
+
 
 
 		theModel.addAttribute("filter", "");
@@ -111,7 +134,7 @@ public class DashboardController {
 		System.out.println(" ------------------- Keyword Category is    ------------- " + keywordCategory);
 
 		System.out.println(" ------------------- keywordJob is    ------------- " + keywordJob);
-		System.out.println(" ------------------- keywordStaus  is    ------------- " + keywordStatus);
+		System.out.println(" ------------------- keywordStaus  is    ------------- " + keywordStatus );
 
 
 		return "list-admin-applications";
