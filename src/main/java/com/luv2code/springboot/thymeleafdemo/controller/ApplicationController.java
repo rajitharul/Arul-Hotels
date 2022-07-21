@@ -7,6 +7,7 @@ import com.luv2code.springboot.thymeleafdemo.dao.StatusRepository;
 import com.luv2code.springboot.thymeleafdemo.entity.Application;
 import com.luv2code.springboot.thymeleafdemo.entity.Job;
 import com.luv2code.springboot.thymeleafdemo.entity.Pilot;
+import com.luv2code.springboot.thymeleafdemo.service.CsvExportService;
 import com.luv2code.springboot.thymeleafdemo.service.DocStorageService;
 import com.luv2code.springboot.thymeleafdemo.service.EmailSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.*;
 
 
@@ -39,6 +42,9 @@ public class ApplicationController {
 
 	@Autowired
 	private StatusRepository statusRepository;
+
+	@Autowired
+	private CsvExportService csvExportService;
 
 
 	@GetMapping("/list")
@@ -173,6 +179,14 @@ public class ApplicationController {
 		return "track-application";
 	}
 
+
+
+	@GetMapping(path = "/applicationCSV")
+	public void getAllApplicationsInCsv(HttpServletResponse servletResponse) throws IOException {
+		servletResponse.setContentType("text/csv");
+		servletResponse.addHeader("Content-Disposition","attachment; filename=\"applications.csv\"");
+		csvExportService.writeEmployeesToCsv(servletResponse.getWriter());
+	}
 
 }
 

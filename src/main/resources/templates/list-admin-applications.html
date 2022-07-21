@@ -32,25 +32,43 @@
 		<div class="text-nowrap" style="width: 8rem;">
 			Select Filtering Criteria
 		</div>
+
+		Select Category
 		<select class="form-select" aria-label="Default select example" name="keywordCategory" >
 			<option th:each="tempCategory : ${categories}" th:value="${{tempCategory.name}}" th:text="${tempCategory.name}">Select</option>
+			<option th:text="${selectedCategory}" th:value="${selectedCategory}" selected></option>
+
 		</select>
 
+		Select Job
 		<select class="form-select" aria-label="Default select example" name="keywordJob" >
 			<option th:each="tempjob : ${jobs}" th:value="${{tempjob.name}}" th:text="${tempjob.name}">Select</option>
+			<option th:text="${selectedJob}" th:value="${selectedJob}" selected></option>
+
 		</select>
+
+		Select Status
 
 		<select class="form-select" aria-label="Default select example" name="keywordStatus" >
 			<option th:each="tempStatus : ${statuses}" th:value="${{tempStatus.id}}" th:text="${tempStatus.name}">Select</option>
+			<option th:text="${selectedStatus}" th:value="${selectedStatusId}" selected></option>
+
 		</select>
 		Select the Filter Criterai - Filter By
 		<select class="form-select" aria-label="Default select example" name="filterBy" >
 			<option  th:value="Job" >Job</option>
 			<option  th:value="Status" >Status</option>
+			<option  th:value="Category" >Category</option>
+			<option  th:text="${selectedFilter}"  th:value="${selectedFilter}" selected ></option>
+
+
 		</select>
 
-		<button type="submit" class="btn btn-info col-2">Filter</button>
-
+		<div class="container bg-light">
+			<div class="col-md-12 text-center">
+				<button type="submit" class="btn btn-primary">Filter</button>
+			</div>
+		</div>
 
 	</form>
 
@@ -68,6 +86,8 @@
 				<th>mobile</th>
 				<th>status</th>
 				<th>Job Applied</th>
+				<th>Category</th>
+
 				<th>Action</th>
 
 
@@ -84,6 +104,7 @@
 				<td th:text="${tempApplication.mobile}" />
 				<td th:text="${tempApplication.status.name}" />
 				<td th:text="${tempApplication.getJobs()[0].name}" />
+				<td th:text="${tempApplication.getJobs()[0].category.name}" />
 
 
 				<!-- Add update an pilot /link -->
@@ -103,6 +124,13 @@
 	<a th:href="@{/}">Back To the Main DashBoard</a>
 
 </div>
+
+
+
+
+<script src="js/scripts3.js"></script>
+
+
 </body>
 </html>
 
